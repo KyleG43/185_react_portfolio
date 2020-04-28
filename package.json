@@ -1,4 +1,5 @@
 {
+  "homepage": "https://kyleg43.github.io/185_react_portfolio",
   "name": "react-portfolio",
   "version": "0.1.0",
   "private": true,
@@ -14,6 +15,8 @@
     "simple-react-lightbox": "^2.7.3-2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
