@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css'
 import Tab_List from './components/Tab_List';
 import Body from './components/Body'
+import SimpleReactLightbox from "simple-react-lightbox";
+import BackToTop from "react-back-to-top-button";
 
 export class App extends Component {
   constructor(){
@@ -25,12 +27,18 @@ export class App extends Component {
     ]
     return (
       <div className="body">
+        <BackToTop showAt={50} speed={1500} easing="easeInOutQuint">
+          <button className="topButton">Top</button>
+        </BackToTop>
+        <h2>{tabs[this.state.activeTab - 1].title}</h2>
         <div className="nav-bar">
           <Tab_List tabs={tabs} activeTab={this.state.activeTab} changeTab={this.changeTab}/>
         </div>
-        <div className="main-body">
-          <Body activeTab={this.state.activeTab}/>
-        </div>
+        <SimpleReactLightbox>
+          <div className="main-body">
+            <Body activeTab={this.state.activeTab}/>
+          </div>
+        </SimpleReactLightbox>
       </div>
     );
   }
