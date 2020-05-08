@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import './App.css'
-import Tab_List from './components/Tab_List';
+import Tab_List from './components/Tab_List'
 import Body from './components/Body'
-import SimpleReactLightbox from "simple-react-lightbox";
-import BackToTop from "react-back-to-top-button";
+import SimpleReactLightbox from "simple-react-lightbox"
+import BackToTop from "react-back-to-top-button"
 
 export class App extends Component {
   constructor(){
     super();
     this.state = {
-      activeTab: 1
+      activeTab: 1,
     }
     this.changeTab = (id) => {
       this.setState({
@@ -23,7 +23,8 @@ export class App extends Component {
       {id: 1, title: 'Home'},
       {id: 2, title: 'Images'},
       {id: 3, title: 'Videos'},
-      {id: 4, title: 'Projects'}
+      {id: 4, title: 'Projects'},
+      {id: 5, title: 'Guest Book'}
     ]
     return (
       <div className="body">

@@ -113,3 +113,23 @@ img:hover{
   padding-right: 15px;
   padding-bottom: 15px;
 }
+
+.guestbook{
+  padding-left: 10px;
+  display: flex;
+}
+
+.guestbook > div > h4{
+  color: #F0EDED;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.form{
+  background-color: #CDCECF;
+  border-color: black;
+}
+
+.form > form{
+padding: 10px;
+}
