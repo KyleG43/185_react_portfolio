@@ -3,9 +3,13 @@ import config from '../config.js'
 const firebase = require('firebase')
 
 function Guestbook() {
-  const [data, setData] = useState([])
+  const [messages, setMessages] = useState([])
   const [shouldRender, setShouldRender] = useState(true)
-  const sample = ['1', '2', '3']
+  const [name,setName] = useState('')
+  const [description,setDescription] = useState('')
+  const [message,setMessage] = useState('')
+  const [viewable,setViewable] = useState('yes')
+  const [email,setEmail] = useState('')
 
   useEffect(() => {
     //It is necessary to check if firebase has already been initialized otherwise it will throw an exception if it tries to initialize again
@@ -15,7 +19,7 @@ function Guestbook() {
        firebase.initializeApp(config)
     }
     //get a reference to the database
-    let ref = firebase.database().ref('data')
+    let ref = firebase.database().ref('messages')
 
     //retrieve its data
     ref.on('value', snapshot => {
@@ -25,29 +29,65 @@ function Guestbook() {
          const state = snapshot.val()
          //since i use react 16, i set my state like this
          //i have previously declared a state variable like this: const [data, setData] = useState([]) so that I can make the below call
-         setData(state)
+         setMessages(state)
     })
   }, [shouldRender])
+
+  function formSubmit(event){
+    //send jsom object for message to database
+    const msgObject = {
+      name: name,
+      description: description,
+      message: message,
+      viewable: viewable,
+      email: email
+    }
+
+    firebase.database().ref('messages').push().set(msgObject)
+    setShouldRender(!shouldRender) //trigger re-render when new message is added
+
+    event.preventDefault()
+  }
+
+  function handleChange(event){
+    switch(event.target.name){
+      case 'name':
+        setName(event.target.value)
+        break;
+      case 'description':
+        setDescription(event.target.value)
+        break;
+      case 'message':
+        setMessage(event.target.value)
+        break;
+      case 'viewable':
+        setViewable(event.target.value)
+        break;
+      case 'email':
+        setEmail(event.target.value)
+        break;
+    }
+  }
 
   return(
     <div className="guestbook">
       <div>
         <h4>Talk to me, and optionally let everyone know you visited!</h4>
         <div className="form">
-          <form>
+          <form onSubmit={formSubmit}>
             <label for="name">What is your name?</label><br/>
-            <input type="text" className="name" name="name" required/><br/>
-            <label for="name">Offer a short description of yourself.</label><br/>
-            <input type="text" className="desctiptioin" name="description"/><br/>
-            <label for="name">What do you have to say?</label><br/>
-            <input type="text" className="message" name="message" required/><br/>
-            <label for="name">Would you like your name and message to be viewable by other guests of this site?</label><br/>
-            <input type="radio" className="viewable" name="viewable" value="yes" required/>
-            <label for="yes">Yes</label><br/>
-            <input type="radio" className="viewable" name="viewable" value="no" required/>
-            <label for="no">No</label><br/>
+            <input type="text" name="name" value={name} onChange={handleChange} required/><br/>
+            <label for="description">Offer a short description of yourself.</label><br/>
+            <textarea rows="5" cols="40" type="text" name="description" value={description} onChange={handleChange}/><br/>
+            <label for="message">What do you have to say?</label><br/>
+            <textarea rows="5" cols="40" type="text" name="message" value={message} onChange={handleChange} required/><br/>
+            <label for="viewable">Would you like your name and message to be viewable by other guests of this site?</label><br/>
+            <select name="viewable" value={viewable} onChange={handleChange} required>
+              <option selected value="yes">Yes</option>
+              <option value="no">No</option>
+            </select> <br/>
             <label for="email">If you would like me to be able to contact you, what is your emal? (email will not be posted)</label><br/>
-            <input type="text" className="email" name="email"/><br/><br/>
+            <input type="text" name="email" value={email} onChange={handleChange}/><br/><br/>
             <input type="submit" value="Submit"/>
           </form>
         </div>
