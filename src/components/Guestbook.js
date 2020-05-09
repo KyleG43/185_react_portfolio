@@ -55,7 +55,7 @@ function Guestbook() {
 
     firebase.database().ref('messages').push().set(msgObject)
     setShouldRender(!shouldRender) //trigger re-render when new message is added
-    //alert("Message submitted successfully!")
+    alert("Message submitted successfully!")
 
     event.preventDefault()
   }
