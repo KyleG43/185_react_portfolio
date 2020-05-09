@@ -61,14 +61,14 @@ img:hover{
   cursor: pointer;
 }
 
-.main-body{
-  display: flex;
-}
-
-.main-body > img{
+.home > img{
   padding: 15px;
   width: 750px;
   align-self: center;
+}
+
+.home{
+  display: flex;
 }
 
 .bio{
@@ -115,21 +115,38 @@ img:hover{
 }
 
 .guestbook{
-  padding-left: 10px;
   display: flex;
+  justify-content: space-between;
+  padding: 15px;
 }
 
 .guestbook > div > h4{
   color: #F0EDED;
   padding-bottom: 10px;
-  padding-top: 10px;
 }
 
 .form{
   background-color: #CDCECF;
   border-color: black;
+  border-radius: 20px;
+  margin-rignt: 50px;
 }
 
 .form > form{
 padding: 10px;
+}
+
+.displayMessages{
+  width: 50%;
+  padding-left: 100px;
+}
+
+.message{
+  color: #F0EDED;
+  background-color:  #747576;
+  padding: 10px;
+  margin-bottom: 25px;
+  border-radius: 20px;
+  border-color: black;
+  width: 50%;
 }

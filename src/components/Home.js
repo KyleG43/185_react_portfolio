@@ -4,7 +4,7 @@ import Sacramento from '../images/sacramento.jpg'
 export class Home extends Component {
   render() {
     return (
-      <div className="main-body">
+      <div className="home">
         <img src={Sacramento}/>
         <div className="bio">
           <h5>About Me</h5>

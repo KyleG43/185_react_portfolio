@@ -8,7 +8,7 @@ function Guestbook() {
   const [name,setName] = useState('')
   const [description,setDescription] = useState('')
   const [message,setMessage] = useState('')
-  const [viewable,setViewable] = useState('yes')
+  const [viewable,setViewable] = useState(true)
   const [email,setEmail] = useState('')
 
   useEffect(() => {
@@ -23,28 +23,39 @@ function Guestbook() {
 
     //retrieve its data
     ref.on('value', snapshot => {
-         //this is your call back function
-    		 //state will be a JSON object after this
-         //set your apps state to contain this data however you like
-         const state = snapshot.val()
-         //since i use react 16, i set my state like this
-         //i have previously declared a state variable like this: const [data, setData] = useState([]) so that I can make the below call
-         setMessages(state)
+      //this is your call back function
+      //state will be a JSON object after this
+      //set your apps state to contain this data however you like
+      const state = snapshot.val()
+      //since i use react 16, i set my state like this
+      //i have previously declared a state variable like this: const [data, setData] = useState([]) so that I can make the below call
+      var msgArray = []
+      for(var key in state)
+        if(state[key].viewable)
+          msgArray.push(state[key])
+      setMessages(msgArray)
+      console.log(msgArray)
     })
+
   }, [shouldRender])
 
   function formSubmit(event){
     //send jsom object for message to database
+    let today = new Date()
+    const date = today.getMonth()+1 + '/' + today.getDate() + '/' + today.getFullYear()
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     const msgObject = {
       name: name,
       description: description,
       message: message,
       viewable: viewable,
-      email: email
+      email: email,
+      date: date + ', ' + time
     }
 
     firebase.database().ref('messages').push().set(msgObject)
     setShouldRender(!shouldRender) //trigger re-render when new message is added
+    //alert("Message submitted successfully!")
 
     event.preventDefault()
   }
@@ -61,7 +72,9 @@ function Guestbook() {
         setMessage(event.target.value)
         break;
       case 'viewable':
-        setViewable(event.target.value)
+        if(event.target.value == 'yes')
+          setViewable(true)
+        else setViewable(false)
         break;
       case 'email':
         setEmail(event.target.value)
@@ -78,11 +91,11 @@ function Guestbook() {
             <label for="name">What is your name?</label><br/>
             <input type="text" name="name" value={name} onChange={handleChange} required/><br/>
             <label for="description">Offer a short description of yourself.</label><br/>
-            <textarea rows="5" cols="40" type="text" name="description" value={description} onChange={handleChange}/><br/>
+            <textarea rows="2" cols="40" type="text" name="description" value={description} onChange={handleChange}/><br/>
             <label for="message">What do you have to say?</label><br/>
-            <textarea rows="5" cols="40" type="text" name="message" value={message} onChange={handleChange} required/><br/>
+            <textarea rows="2" cols="40" type="text" name="message" value={message} onChange={handleChange} required/><br/>
             <label for="viewable">Would you like your name and message to be viewable by other guests of this site?</label><br/>
-            <select name="viewable" value={viewable} onChange={handleChange} required>
+            <select name="viewable" onChange={handleChange} required>
               <option selected value="yes">Yes</option>
               <option value="no">No</option>
             </select> <br/>
@@ -92,10 +105,18 @@ function Guestbook() {
           </form>
         </div>
       </div>
+      <div className="displayMessages">
+        {messages.map((msg, index) =>(
+          <div className="message">
+            <p>{msg.date}</p>
+            <b>{msg.name}</b>
+            <p>{msg.description}</p>
+            <p>{msg.message}</p>
+            <p>{msg.email}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
-  /*{sample.map((s, index) =>(
-    <h2>{s}</h2>
-  ))}*/
 }
 export default Guestbook;
