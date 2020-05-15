@@ -160,3 +160,7 @@ padding: 10px;
   padding: 5px;
   align-self: center;
 }
+
+.movies > img:hover {
+  opacity: 0.55;
+}

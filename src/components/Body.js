@@ -27,19 +27,19 @@ export class Body extends Component {
     else if(activeTab == 4){
       return (
         <SRLWrapper>
-          <Projects/>
+          <Movies/>
         </SRLWrapper>
       );
     }
     else if(activeTab == 5) {
-      return <Guestbook/>;
-    }
-    else {
-      return(
+      return (
         <SRLWrapper>
-          <Movies/>
+          <Projects/>
         </SRLWrapper>
       );
+    }
+    else {
+      return <Guestbook/>;
     }
   }
   render() {

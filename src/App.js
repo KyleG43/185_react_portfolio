@@ -23,9 +23,9 @@ export class App extends Component {
       {id: 1, title: 'Home'},
       {id: 2, title: 'Images'},
       {id: 3, title: 'Videos'},
-      {id: 4, title: 'Projects'},
-      {id: 5, title: 'Guest Book'},
-      {id: 6, title: 'Movies'}
+      {id: 4, title: 'Movies'},
+      { id: 5, title: 'Projects'},
+      {id: 6, title: 'Guest Book'}
     ]
     return (
       <div className="body">
