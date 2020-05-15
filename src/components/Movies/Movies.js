@@ -7,6 +7,7 @@ function Movies(){
     const [sent, setSent] = useState(false);
     
     if (!sent){
+        setSent(true);
         var res = []
         for(var movie in movies){
             axios('http://www.omdbapi.com/?apikey=7b39182f&i=' + movies[movie])
@@ -14,13 +15,9 @@ function Movies(){
                     res.push(response.data);
                     if (res.length == 8)
                         setResponses(res);
-                        setSent(true);
                 });
-            //console.log(res)
         }
     }
-
-    console.log(responses);
 
     return(
         <div className="movies">
