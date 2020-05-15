@@ -31,9 +31,3 @@ function Movies(){
     );
 }
 export default Movies;
-
-/*{responses.map((res, index) => (
-                <div className="movie">
-                    <p>{res.Title}</p>
-                </div>
-            ))}*/
