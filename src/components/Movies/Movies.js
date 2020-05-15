@@ -10,7 +10,7 @@ function Movies(){
         setSent(true);
         var res = []
         for(var movie in movies){
-            axios('http://www.omdbapi.com/?apikey=7b39182f&i=' + movies[movie])
+            axios('https://www.omdbapi.com/?apikey=7b39182f&i=' + movies[movie])
                 .then(function(response){
                     res.push(response.data);
                     if (res.length == Object.keys(movies).length)
