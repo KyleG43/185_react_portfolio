@@ -129,7 +129,7 @@ img:hover{
   background-color: #CDCECF;
   border-color: black;
   border-radius: 20px;
-  margin-rignt: 50px;
+  margin-right: 50px;
 }
 
 .form > form{
@@ -149,4 +149,14 @@ padding: 10px;
   border-radius: 20px;
   border-color: black;
   width: 50%;
+}
+
+.movies{
+  padding: 5px;
+  display: block;
+}
+
+.movies > img{
+  padding: 5px;
+  align-self: center;
 }

@@ -34,7 +34,6 @@ function Guestbook() {
         if(state[key].viewable)
           msgArray.push(state[key])
       setMessages(msgArray)
-      console.log(msgArray)
     })
 
   }, [shouldRender])
