@@ -4,7 +4,9 @@ import Images from './Images';
 import Videos from './Videos';
 import Projects from './Projects';
 import Guestbook from './Guestbook';
-import Movies from './Movies/Movies.js';
+import Movies from './Movies';
+import AddMovie from './AddMovie';
+import CreateList from './CreateList';
 import { SRLWrapper } from "simple-react-lightbox";
 
 export class Body extends Component {
@@ -31,7 +33,11 @@ export class Body extends Component {
         </SRLWrapper>
       );
     }
-    else if(activeTab == 5) {
+    else if(activeTab == 5) 
+      return <AddMovie/>;
+    else if(activeTab == 6)
+      return <CreateList/>;
+    else if(activeTab == 7) {
       return (
         <SRLWrapper>
           <Projects/>
