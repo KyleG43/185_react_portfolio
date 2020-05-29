@@ -24,15 +24,38 @@ function AddMovie(){
             }
         }
 
-        //ID is in correct form, so make api call and add json to database
+        //check if ID is already in database
+        var duplicate = false;
+        //get firebase reference
+        if (!firebase.apps.length) {
+            firebase.initializeApp(config);
+        }
+        let ref = firebase.database().ref('movies');
+        ref.on('value', snapshot => {
+            const state = snapshot.val();
+            for (var key in state){
+                if(state[key].imdbID == movieID){
+                    duplicate = true;
+                    break;
+                }
+            }
+        })
+        if(duplicate){
+            alert('Movie has already been added');
+            return;
+        }
+
+        //ID is in correct form and hasn't been added, so make api call and add json to database
         axios('https://www.omdbapi.com/?apikey=7b39182f&i=' + movieID)
                 .then(function(movie){
+                    //get firebase reference
                     if (!firebase.apps.length) {
                         firebase.initializeApp(config);
                     }
+
+                    //put movie in database
                     firebase.database().ref('movies').push().set(movie.data);
                     alert("Movie added successfully!");
-                    //console.log(movie.data)
                 });
 
     }
