@@ -27,11 +27,9 @@ function Movies(){
           //i have previously declared a state variable like this: const [data, setData] = useState([]) so that I can make the below call
           var movieArray = []
           for(var key in state)
-            if(state[key].viewable)
-              movieArray.push(state[key])
+            movieArray.push(state[key])
           setMovies(movieArray)
-        })
-    
+        })    
       }, [shouldRender])
 
 

@@ -46,7 +46,7 @@ function AddMovie(){
             <h2>Add a new movie</h2>
             <div className="form">
                 <form onSubmit={formSubmit}>
-                    <label for="ImdbID">Modie ID</label> <br/>
+                    <label for="ImdbID">Movie ID</label> <br/>
                     <input type="text" name="ImdbID" value={movieID} onChange={handleChange} placeholder="Imdb ID" required/> <br/> <br/>
                     <input type="submit" value="Submit"/>
                 </form>
