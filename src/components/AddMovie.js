@@ -56,7 +56,6 @@ function AddMovie(){
                     firebase.database().ref('movies').child('All').push().set(movie.data);
                     alert("Movie added successfully!");
                 });
-
     }
 
     function handleChange(event){
