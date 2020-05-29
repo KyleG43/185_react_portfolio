@@ -56,10 +56,6 @@ function Movies(){
 
       function handleSearchChange(event){
           setSearchTitle(event.target.value);
-      }
-
-      function searchSubmit(event){
-          event.preventDefault();
           setShouldRender(!shouldRender);
       }
 
@@ -73,10 +69,7 @@ function Movies(){
                 </select>
             </div>
             <div className="search-bar">
-                <form onSubmit={searchSubmit}>
-                    <input type="text" name="title" value={searchTitle} onChange={handleSearchChange} placeholder="Movie Title" required/>
-                    <input type="submit" value="Search"/>
-                </form>
+                <input type="text" name="title" value={searchTitle} onChange={handleSearchChange} placeholder="Movie Title"/>
             </div>
             {movies.map((movie, index) => (
                 <img src={movie.Poster} alt={movie.Title + ' | ' + movie.Director + ' | ' + movie.Ratings[0].Value}/>
