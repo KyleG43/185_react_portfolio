@@ -33,24 +33,12 @@ function Movies(){
         })
     
       }, [shouldRender])
-    
-    /*if (!sent){
-        setSent(true);
-        var res = []
-        for(var movie in movies){
-            axios('https://www.omdbapi.com/?apikey=7b39182f&i=' + movies[movie])
-                .then(function(response){
-                    res.push(response.data);
-                    if (res.length == Object.keys(movies).length)
-                        setResponses(res);
-                });
-        }
-    }*/
+
 
     return(
         <div className="movies">
-            {movies.map((res, index) => (
-                <img src={res.Poster} alt={res.Title + ' | ' + res.Director + ' | ' + res.Ratings[0].Value}/>
+            {movies.map((movie, index) => (
+                <img src={movie.Poster} alt={movie.Title + ' | ' + movie.Director + ' | ' + movie.Ratings[0].Value}/>
             ))}
         </div>
     );
