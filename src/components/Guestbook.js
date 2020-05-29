@@ -95,8 +95,8 @@ function Guestbook() {
             <textarea rows="2" cols="40" type="text" name="message" value={message} onChange={handleChange} required/><br/>
             <label for="viewable">Would you like your name and message to be viewable by other guests of this site?</label><br/>
             <select name="viewable" onChange={handleChange} required>
-            <option selected value="yes">Yes</option>
-            <option value="no">No</option>
+              <option selected value="yes">Yes</option>
+              <option value="no">No</option>
             </select> <br/>
             <label for="email">If you would like me to be able to contact you, what is your emal? (email will not be posted)</label><br/>
             <input type="text" name="email" value={email} onChange={handleChange}/><br/><br/>

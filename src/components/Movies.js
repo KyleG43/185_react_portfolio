@@ -5,6 +5,8 @@ const firebase = require('firebase')
 
 function Movies(){
     const [movies, setMovies] = useState([])
+    const [lists, setLists] = useState([])
+    const [currList, setCurrList] = useState('All')
     const [shouldRender, setShouldRender] = useState(true)
 
     useEffect(() => {
@@ -15,10 +17,19 @@ function Movies(){
            firebase.initializeApp(config)
         }
         //get a reference to the database
-        let ref = firebase.database().ref('movies').child('All')
+        let ref = firebase.database().ref('movies')
+
+        //get list of lists
+        ref.on('value', snapshot => {
+            const state = snapshot.val();
+            var listArray = [];
+            for (var list in state)
+                listArray.push(list);
+            setLists(listArray);
+        })
     
         //retrieve its data
-        ref.on('value', snapshot => {
+        ref.child(currList).on('value', snapshot => {
           //this is your call back function
           //state will be a JSON object after this
           //set your apps state to contain this data however you like
@@ -32,9 +43,20 @@ function Movies(){
         })    
       }, [shouldRender])
 
+      function handleListChange(event){
+        setCurrList(event.target.value);
+        setShouldRender(!shouldRender);
+      }
 
     return(
         <div className="movies">
+            <div className="list-select">
+                <select name="lists" onChange={handleListChange} required>
+                    {lists.map((list, index) => (
+                        <option value={list}>{list}</option>
+                    ))}
+                </select>
+            </div>
             {movies.map((movie, index) => (
                 <img src={movie.Poster} alt={movie.Title + ' | ' + movie.Director + ' | ' + movie.Ratings[0].Value}/>
             ))}

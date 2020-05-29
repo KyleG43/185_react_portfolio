@@ -40,7 +40,7 @@ function CreateList(){
 
     return(
         <div className="addMovie">
-            <h2>Add a new movie</h2>
+            <h2>Create a new list</h2>
             <div className="form">
                 <form onSubmit={formSubmit}>
                     <label for="ImdbID">List Title</label> <br/>
