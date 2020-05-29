@@ -7,6 +7,7 @@ function Movies(){
     const [movies, setMovies] = useState([])
     const [lists, setLists] = useState([])
     const [currList, setCurrList] = useState('All')
+    const [searchTitle, setSearchTitle] = useState('')
     const [shouldRender, setShouldRender] = useState(true)
 
     useEffect(() => {
@@ -37,8 +38,13 @@ function Movies(){
           //since i use react 16, i set my state like this
           //i have previously declared a state variable like this: const [data, setData] = useState([]) so that I can make the below call
           var movieArray = []
-          for(var key in state)
-            movieArray.push(state[key])
+          for(var movie in state){
+            if(searchTitle != ''){
+                if(state[movie].Title.toLowerCase().includes(searchTitle.toLowerCase()))
+                    movieArray.push(state[movie]);
+            }
+            else movieArray.push(state[movie]);
+          }
           setMovies(movieArray)
         })    
       }, [shouldRender])
@@ -46,6 +52,15 @@ function Movies(){
       function handleListChange(event){
         setCurrList(event.target.value);
         setShouldRender(!shouldRender);
+      }
+
+      function handleSearchChange(event){
+          setSearchTitle(event.target.value);
+      }
+
+      function searchSubmit(event){
+          event.preventDefault();
+          setShouldRender(!shouldRender);
       }
 
     return(
@@ -56,6 +71,12 @@ function Movies(){
                         <option value={list}>{list}</option>
                     ))}
                 </select>
+            </div>
+            <div className="search-bar">
+                <form onSubmit={searchSubmit}>
+                    <input type="text" name="title" value={searchTitle} onChange={handleSearchChange} placeholder="Movie Title" required/>
+                    <input type="submit" value="Search"/>
+                </form>
             </div>
             {movies.map((movie, index) => (
                 <img src={movie.Poster} alt={movie.Title + ' | ' + movie.Director + ' | ' + movie.Ratings[0].Value}/>
