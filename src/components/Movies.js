@@ -15,7 +15,7 @@ function Movies(){
            firebase.initializeApp(config)
         }
         //get a reference to the database
-        let ref = firebase.database().ref('movies')
+        let ref = firebase.database().ref('movies').child('All')
     
         //retrieve its data
         ref.on('value', snapshot => {

@@ -30,8 +30,7 @@ function AddMovie(){
         if (!firebase.apps.length) {
             firebase.initializeApp(config);
         }
-        let ref = firebase.database().ref('movies');
-        ref.on('value', snapshot => {
+        firebase.database().ref('movies').child('All').on('value', snapshot => {
             const state = snapshot.val();
             for (var key in state){
                 if(state[key].imdbID == movieID){
@@ -54,7 +53,7 @@ function AddMovie(){
                     }
 
                     //put movie in database
-                    firebase.database().ref('movies').push().set(movie.data);
+                    firebase.database().ref('movies').child('All').push().set(movie.data);
                     alert("Movie added successfully!");
                 });
 
