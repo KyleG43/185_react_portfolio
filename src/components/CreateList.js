@@ -41,8 +41,8 @@ function CreateList(){
     return(
         <div className="addMovie">
             <h2>Create a new list</h2>
-            <div className="form">
-                <form onSubmit={formSubmit}>
+            <div>
+                <form className="movieForm" onSubmit={formSubmit}>
                     <label for="ImdbID">List Title</label> <br/>
                     <input type="text" name="ImdbID" value={listName} onChange={handleChange} placeholder="List Title" required/> <br/> <br/>
                     <input type="submit" value="Submit"/>

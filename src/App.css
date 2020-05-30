@@ -236,3 +236,12 @@ padding: 10px;
   background-color: green;
   border-radius: 5px;
 }
+
+.movieForm{
+  background-color: #CDCECF;
+  border-color: black;
+  border-radius: 5px;
+  margin-left: 15px;
+  width: 250px;
+  padding: 5px;
+}
