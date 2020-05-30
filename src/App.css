@@ -180,3 +180,36 @@ padding: 10px;
   justify-content: center;
   align-items: center;
 }
+
+.lightboxPoster > img{
+  border-color: black;
+}
+
+.lbContent{
+  background-color: white;
+  display: flex;
+  padding: 5px;
+}
+
+.lightboxOther{
+  padding-left: 5px;
+}
+
+#lbScore{
+  background-color: #2A89F0;
+  width: 125px;
+  padding: 2px;
+}
+
+#lbPlot{
+  color: black;
+  width: 400px;
+}
+
+#lbAwards{
+  color: black;
+}
+
+#lbRuntime{
+  color: black;
+}

@@ -62,15 +62,60 @@ function Movies(){
     }
 
     function imageClick(event){
+        var clickedMovie = {};
+        for (var i=0; i<movies.length; i++){
+            if(movies[i].Poster == event.target.src){
+                clickedMovie = movies[i];
+                break;
+            }
+        }
         const lightbox = document.getElementById('lightbox');
         lightbox.classList.add('active');
-        const img = document.getElementById('lightboxImage');
-        img.src = event.target.src;
+        document.getElementById('lightboxImage').src = clickedMovie.Poster;
+        document.getElementById('lbTitle').textContent = clickedMovie.Title;
+        document.getElementById('lbScore').textContent = 'IMDb Rating: ' + clickedMovie.imdbRating;
+        document.getElementById('lbPlot').textContent = clickedMovie.Plot;
+        document.getElementById('lbAwards').textContent = 'Awards: ' + clickedMovie.Awards;
+        document.getElementById('lbDirector').textContent = 'Directed by ' + clickedMovie.Director;
+        document.getElementById('lbRuntime').textContent = clickedMovie.Runtime;
+
+        //generate options for add to list dropdown
+        const addToList = document.getElementById('addToList');
+        if (!firebase.apps.length) {
+            firebase.initializeApp(config);
+        }
+        for (var i=0; i<lists.length; i++){
+            var inList = false;
+            firebase.database().ref('movies').child(lists[i]).on('value', snapshot => {
+                const state = snapshot.val();
+                for (var key in state){
+                    if(state[key].Title == clickedMovie.Title){
+                        inList = true;
+                        break;
+                    }
+                }
+                if(!inList){
+                    const option = document.createElement('option');
+                    option.value = lists[i];
+                    option.textContent = lists[i];
+                    option.onClick = addToListClick;
+                    addToList.appendChild(option);
+                }
+            })
+        }
+    }
+
+    function addToListClick(event){
+
     }
 
     function lightboxClick(event) {
         if (event.target !== event.currentTarget) return;
         const activeLightbox = document.getElementById(event.target.id);
+        const addToList = document.getElementById('addToList');
+        while(addToList.firstChild){
+            addToList.removeChild(addToList.firstChild);
+        }
         activeLightbox.classList.remove('active');
     }
 
@@ -87,13 +132,31 @@ function Movies(){
                 <input type="text" name="title" value={searchTitle} onChange={handleSearchChange} placeholder="Search Movie Titles"/>
             </div>
             {movies.map((movie, index) => (
-                <img src={movie.Poster} alt={movie.Title + ' | ' + movie.Director + ' | ' + movie.Ratings[0].Value} onClick={imageClick}/>
+                <img src={movie.Poster} onClick={imageClick}/>
             ))}
             <div id="lightbox" onClick={lightboxClick}>
-                <div className="lightboxContent">
-                    <img id="lightboxImage"></img>
+                <div className="lbContent">
+                    <div className="lightboxPoster">
+                        <img id="lightboxImage"/>
+                    </div>
+                    <div className="lightboxOther">
+                        <h4 id="lbTitle"/>
+                        <p id="lbScore"/>
+                        <p id="lbPlot"/>
+                        <p id="lbAwards"/>
+                        <b id="lbDirector"/>
+                        <p id="lbRuntime"/>
+                        <br/>
+                        <br/>
+                        <div className="lbOptions">
+                            <button id="delete">Delete</button>
+                            <select id="addToList">
+                                <option value="" selected disabled hidden>Add to list</option>
+                            </select>
+                        </div>
+                    </div>
+
                 </div>
-                
             </div>
         </div>
     );
