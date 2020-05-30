@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 //const axios = require('axios').default;
 import config from '../config.js'
+import { useLightbox } from 'simple-react-lightbox';
+import { act } from 'react-dom/test-utils';
 const firebase = require('firebase')
 
 function Movies(){
@@ -47,17 +49,30 @@ function Movies(){
           }
           setMovies(movieArray)
         })    
-      }, [shouldRender])
+    }, [shouldRender])
 
-      function handleListChange(event){
-        setCurrList(event.target.value);
+    function handleListChange(event){
+    setCurrList(event.target.value);
+    setShouldRender(!shouldRender);
+    }
+
+    function handleSearchChange(event){
+        setSearchTitle(event.target.value);
         setShouldRender(!shouldRender);
-      }
+    }
 
-      function handleSearchChange(event){
-          setSearchTitle(event.target.value);
-          setShouldRender(!shouldRender);
-      }
+    function imageClick(event){
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.add('active');
+        const img = document.getElementById('lightboxImage');
+        img.src = event.target.src;
+    }
+
+    function lightboxClick(event) {
+        if (event.target !== event.currentTarget) return;
+        const activeLightbox = document.getElementById(event.target.id);
+        activeLightbox.classList.remove('active');
+    }
 
     return(
         <div className="movies">
@@ -69,11 +84,17 @@ function Movies(){
                 </select>
             </div>
             <div className="search-bar">
-                <input type="text" name="title" value={searchTitle} onChange={handleSearchChange} placeholder="Movie Title"/>
+                <input type="text" name="title" value={searchTitle} onChange={handleSearchChange} placeholder="Search Movie Titles"/>
             </div>
             {movies.map((movie, index) => (
-                <img src={movie.Poster} alt={movie.Title + ' | ' + movie.Director + ' | ' + movie.Ratings[0].Value}/>
+                <img src={movie.Poster} alt={movie.Title + ' | ' + movie.Director + ' | ' + movie.Ratings[0].Value} onClick={imageClick}/>
             ))}
+            <div id="lightbox" onClick={lightboxClick}>
+                <div className="lightboxContent">
+                    <img id="lightboxImage"></img>
+                </div>
+                
+            </div>
         </div>
     );
 }

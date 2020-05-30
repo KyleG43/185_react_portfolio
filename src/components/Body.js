@@ -27,11 +27,7 @@ export class Body extends Component {
     else if(activeTab == 3)
       return <Videos/>;
     else if(activeTab == 4){
-      return (
-        <SRLWrapper>
-          <Movies/>
-        </SRLWrapper>
-      );
+      return <Movies/>;
     }
     else if(activeTab == 5) 
       return <AddMovie/>;
