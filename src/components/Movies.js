@@ -195,7 +195,7 @@ function Movies(){
                         <img id="lightboxImage"/>
                     </div>
                     <div className="lightboxOther">
-                        <h4 id="lbTitle"/>
+                        <h3 id="lbTitle"/>
                         <p id="lbScore"/>
                         <p id="lbPlot"/>
                         <p id="lbAwards"/>
