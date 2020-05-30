@@ -61,8 +61,8 @@ function Movies(){
         setShouldRender(!shouldRender);
     }
 
+    var clickedMovie = {};
     function imageClick(event){
-        var clickedMovie = {};
         for (var i=0; i<movies.length; i++){
             if(movies[i].Poster == event.target.src){
                 clickedMovie = movies[i];
@@ -81,6 +81,13 @@ function Movies(){
 
         //generate options for add to list dropdown
         const addToList = document.getElementById('addToList');
+        const option = document.createElement('option');
+        option.textContent = "Add to list";
+        option.value = '';
+        option.selected = true;
+        option.disabled = true;
+        option.hidden = true;
+        addToList.appendChild(option);
         if (!firebase.apps.length) {
             firebase.initializeApp(config);
         }
@@ -98,21 +105,26 @@ function Movies(){
                     const option = document.createElement('option');
                     option.value = lists[i];
                     option.textContent = lists[i];
-                    option.onClick = addToListClick;
                     addToList.appendChild(option);
                 }
             })
         }
     }
 
-    function addToListClick(event){
-
-    }
-
     function lightboxClick(event) {
         if (event.target !== event.currentTarget) return;
         const activeLightbox = document.getElementById(event.target.id);
         const addToList = document.getElementById('addToList');
+        if(!addToList.value == ''){
+            //get firebase reference
+            if (!firebase.apps.length) {
+                firebase.initializeApp(config);
+            }
+
+            //put movie in database
+            firebase.database().ref('movies').child(addToList.value).push().set(clickedMovie);
+            alert("Movie added successfully!");
+        }
         while(addToList.firstChild){
             addToList.removeChild(addToList.firstChild);
         }
@@ -150,9 +162,7 @@ function Movies(){
                         <br/>
                         <div className="lbOptions">
                             <button id="delete">Delete</button>
-                            <select id="addToList">
-                                <option value="" selected disabled hidden>Add to list</option>
-                            </select>
+                            <select id="addToList"/>
                         </div>
                     </div>
 
