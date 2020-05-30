@@ -41,7 +41,7 @@ function Movies(){
           //i have previously declared a state variable like this: const [data, setData] = useState([]) so that I can make the below call
           var movieArray = []
           for(var movie in state){
-            if(searchTitle != ''){
+            if(searchTitle != '' && state[movie]){
                 if(state[movie].Title.toLowerCase().includes(searchTitle.toLowerCase()))
                     movieArray.push(state[movie]);
             }
@@ -123,7 +123,6 @@ function Movies(){
 
             //put movie in database
             firebase.database().ref('movies').child(addToList.value).push().set(clickedMovie);
-            alert("Movie added successfully!");
         }
         while(addToList.firstChild){
             addToList.removeChild(addToList.firstChild);
@@ -148,21 +147,43 @@ function Movies(){
                 }
             })
         }
+        for (var i=0; i<lists.length; i++){
+            //check if list is already in database
+            var duplicate = false;
+            //get firebase reference
+            if (!firebase.apps.length) {
+                firebase.initializeApp(config);
+            }
+            firebase.database().ref('movies').on('value', snapshot => {
+                const state = snapshot.val();
+                for (var list in state){
+                    if(list == lists[i]){
+                        duplicate = true;
+                        break;
+                    }
+                }
+            })
+            if(!duplicate){
+                //put list in database
+                firebase.database().ref('movies').child(lists[i]).set("");
+            }
+        }
+        
         //close the lightbox
         var activeLightBox = document.getElementById("lightbox");
         activeLightBox.classList.remove('active');
+        alert("Movie deleted successfully!")
+        setShouldRender(!shouldRender);
     }
 
     return(
         <div className="movies">
-            <div className="list-select">
-                <select name="lists" onChange={handleListChange} required>
+            <div classname="movieOptions">
+                <select id="listSelector" name="lists" onChange={handleListChange} required>
                     {lists.map((list, index) => (
                         <option value={list}>{list}</option>
                     ))}
                 </select>
-            </div>
-            <div className="search-bar">
                 <input type="text" name="title" value={searchTitle} onChange={handleSearchChange} placeholder="Search Movie Titles"/>
             </div>
             {movies.map((movie, index) => (
