@@ -131,6 +131,28 @@ function Movies(){
         activeLightbox.classList.remove('active');
     }
 
+    function deleteClick(event) {
+        //get firebase reference
+        if (!firebase.apps.length) {
+            firebase.initializeApp(config);
+        }
+        //delete clicked movie from all lists
+        for (var i=0; i<lists.length; i++){
+            firebase.database().ref('movies').child(lists[i]).on('value', snapshot => {
+                const state = snapshot.val();
+                for (var key in state){
+                    if(state[key].Title == clickedMovie.Title){
+                        firebase.database().ref('movies').child(lists[i]).child(key).remove();
+                        break;
+                    }
+                }
+            })
+        }
+        //close the lightbox
+        var activeLightBox = document.getElementById("lightbox");
+        activeLightBox.classList.remove('active');
+    }
+
     return(
         <div className="movies">
             <div className="list-select">
@@ -161,7 +183,7 @@ function Movies(){
                         <br/>
                         <br/>
                         <div className="lbOptions">
-                            <button id="delete">Delete</button>
+                            <button id="delete" onClick={deleteClick}>Delete</button>
                             <select id="addToList"/>
                         </div>
                     </div>
