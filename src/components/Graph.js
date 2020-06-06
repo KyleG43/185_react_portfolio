@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import config from '../config.js';
+import { schemeDark2 } from 'd3';
 const firebase = require('firebase');
 var d3 = require('d3');
 
@@ -13,11 +14,11 @@ firebase.database().ref('movies').child('GraphViz').on('value', snapshot => {
     const state = snapshot.val();
     for (var key in state){
         const movie = state[key];
-        const movieObject = {data: movie.Poster, radius: 100};
+        const movieObject = {data: movie.Poster, radius: 100, group: 1};
         nodes.push(movieObject);
         const actors = movie.Actors.split(', ');
         for (var i=0; i<actors.length; i++){
-            const actorObject = {data: actors[i], radius: 50};
+            const actorObject = {data: actors[i], radius: 50, group: 2};
             if (!nodes.includes(actors[i])){
                 nodes.push(actorObject);
             }
@@ -29,7 +30,30 @@ firebase.database().ref('movies').child('GraphViz').on('value', snapshot => {
 
 
 function Graph(){
-    console.log(links)
+    function drag(simulation) {
+        function dragStarted(d) {
+            if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(d) {
+            d.fx = d3.event.x;
+            d.fy = d3.event.y;
+        }
+
+        function dragEnded(d) {
+            if (!d3.event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+
+        return d3.drag()
+            .on("start", dragStarted)
+            .on("drag", dragged)
+            .on("end", dragEnded);
+    }
+
     function chart(){
         //svg stuff
         const width = 1920;
@@ -49,6 +73,17 @@ function Graph(){
             .join("line")
             .attr("stroke-width", 1);
 
+        const color = (node) => {
+            if (node.group == 1)
+                return d3.color("blue");
+            return d3.color("pink");
+        }
+
+        const simulation = d3.forceSimulation(obj_nodes)
+            .force("link", d3.forceLink().links(links).id(d => { return d.index; }).distance(200))
+            .force("charge", d3.forceManyBody())
+            .force("center", d3.forceCenter(width / 2, height / 2));
+
         const node = svg.append("g")
             .attr("stroke", "#fff")
             .attr("stroke-width", 1.5)
@@ -56,14 +91,9 @@ function Graph(){
             .data(obj_nodes)
             .join("circle")
             .attr("r", d => d.radius)
-            .attr("fill", d3.color("steelblue"));
+            .attr("fill", color)
+            .call(drag(simulation));
 
-        console.log(nodes)
-        console.log(links)
-        const simulation = d3.forceSimulation(obj_nodes)
-            .force("link", d3.forceLink().links(links).id(d => { return d.index; }).distance(200))
-            .force("charge", d3.forceManyBody())
-            .force("center", d3.forceCenter(width / 2, height / 2));
         
         simulation.on("tick", () => {
             link
