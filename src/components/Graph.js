@@ -29,8 +29,6 @@ function Graph(){
                 }
             }
         })
-        console.log(graphNodes);
-        console.log(graphLinks);
         setNodes(graphNodes);
         setLinks(graphLinks);
     }, [shouldRender])
