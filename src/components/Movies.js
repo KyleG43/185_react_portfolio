@@ -208,7 +208,6 @@ function Movies(){
                             <select id="addToList"/>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

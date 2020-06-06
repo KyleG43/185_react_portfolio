@@ -7,6 +7,7 @@ import Guestbook from './Guestbook';
 import Movies from './Movies';
 import AddMovie from './AddMovie';
 import CreateList from './CreateList';
+import Graph from './Graph';
 import { SRLWrapper } from "simple-react-lightbox";
 
 export class Body extends Component {
@@ -29,11 +30,13 @@ export class Body extends Component {
     else if(activeTab == 4){
       return <Movies/>;
     }
-    else if(activeTab == 5) 
+    else if(activeTab == 5)
+      return <Graph/>;
+    else if(activeTab == 6) 
       return <AddMovie/>;
-    else if(activeTab == 6)
+    else if(activeTab == 7)
       return <CreateList/>;
-    else if(activeTab == 7) {
+    else if(activeTab == 8) {
       return (
         <SRLWrapper>
           <Projects/>
