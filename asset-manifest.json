@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/185_react_portfolio/static/css/main.2de49039.chunk.css",
-    "main.js": "/185_react_portfolio/static/js/main.45672084.chunk.js",
-    "main.js.map": "/185_react_portfolio/static/js/main.45672084.chunk.js.map",
+    "main.css": "/185_react_portfolio/static/css/main.0ced3b02.chunk.css",
+    "main.js": "/185_react_portfolio/static/js/main.c66bd014.chunk.js",
+    "main.js.map": "/185_react_portfolio/static/js/main.c66bd014.chunk.js.map",
     "runtime-main.js": "/185_react_portfolio/static/js/runtime-main.6ea0ff42.js",
     "runtime-main.js.map": "/185_react_portfolio/static/js/runtime-main.6ea0ff42.js.map",
-    "static/js/2.29dcfa01.chunk.js": "/185_react_portfolio/static/js/2.29dcfa01.chunk.js",
-    "static/js/2.29dcfa01.chunk.js.map": "/185_react_portfolio/static/js/2.29dcfa01.chunk.js.map",
+    "static/js/2.bdd09dfa.chunk.js": "/185_react_portfolio/static/js/2.bdd09dfa.chunk.js",
+    "static/js/2.bdd09dfa.chunk.js.map": "/185_react_portfolio/static/js/2.bdd09dfa.chunk.js.map",
     "index.html": "/185_react_portfolio/index.html",
-    "precache-manifest.46f9d773e84a86e2752279ff3c414053.js": "/185_react_portfolio/precache-manifest.46f9d773e84a86e2752279ff3c414053.js",
+    "precache-manifest.e3a5eec5e01487d7e315b26c6ba5261b.js": "/185_react_portfolio/precache-manifest.e3a5eec5e01487d7e315b26c6ba5261b.js",
     "service-worker.js": "/185_react_portfolio/service-worker.js",
-    "static/css/main.2de49039.chunk.css.map": "/185_react_portfolio/static/css/main.2de49039.chunk.css.map",
-    "static/js/2.29dcfa01.chunk.js.LICENSE.txt": "/185_react_portfolio/static/js/2.29dcfa01.chunk.js.LICENSE.txt",
+    "static/css/main.0ced3b02.chunk.css.map": "/185_react_portfolio/static/css/main.0ced3b02.chunk.css.map",
+    "static/js/2.bdd09dfa.chunk.js.LICENSE.txt": "/185_react_portfolio/static/js/2.bdd09dfa.chunk.js.LICENSE.txt",
     "static/media/49ers.jfif": "/185_react_portfolio/static/media/49ers.12c56569.jfif",
     "static/media/italy.jfif": "/185_react_portfolio/static/media/italy.c054da1b.jfif",
     "static/media/late.jpg": "/185_react_portfolio/static/media/late.b334e771.jpg",
@@ -23,8 +23,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.6ea0ff42.js",
-    "static/js/2.29dcfa01.chunk.js",
-    "static/css/main.2de49039.chunk.css",
-    "static/js/main.45672084.chunk.js"
+    "static/js/2.bdd09dfa.chunk.js",
+    "static/css/main.0ced3b02.chunk.css",
+    "static/js/main.c66bd014.chunk.js"
   ]
 }
