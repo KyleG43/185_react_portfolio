@@ -4,7 +4,7 @@ import { schemeDark2 } from 'd3';
 const firebase = require('firebase');
 var d3 = require('d3');
 
-//get a list nodes for the graph from the database
+//get a list nodes for the graph from database
 var nodes = [];
 var links = [];
 var pushedNodes = [];
