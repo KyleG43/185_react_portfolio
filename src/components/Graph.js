@@ -15,7 +15,7 @@ firebase.database().ref('movies').child('GraphViz').on('value', snapshot => {
     const state = snapshot.val();
     for (var key in state){
         const movie = state[key];
-        const movieObject = {data: movie.Poster, radius: 100, group: 1};
+        const movieObject = {title: movie.Title, data: movie.Poster, radius: 100, group: 1};
         nodes.push(movieObject);
         pushedNodes.push(movie.Title);
         const actors = movie.Actors.split(', ');
@@ -83,23 +83,6 @@ function Graph(){
 
         var defs = svg.append('svg:defs');
 
-
-        const color = (node) => {
-            if (node.group == 1){
-                defs.append("svg:pattern")
-                    .attr("id", "poster")
-                    .attr("width", 1)
-                    .attr("height", 1)
-                    .attr("patternUnits", "userSpaceOnUse")
-                    .append("svg:image")
-                    .attr("xlink:href", node.data)
-                    .attr("x", 0)
-                    .attr("y", 0);
-                return "url(#poster)";
-            }
-            return d3.color("steelblue");
-        }
-
         const node = svg.append("g")
             .attr("stroke", "#fff")
             .attr("stroke-width", 1.5)
@@ -107,7 +90,22 @@ function Graph(){
             .data(obj_nodes)
             .join("circle")
             .attr("r", d => d.radius)
-            .attr("fill", color)
+            .attr("fill", d => {
+                if (d.group == 1){
+                    defs.append("svg:pattern")
+                        .attr("id", d.data)
+                        .attr("width", 1)
+                        .attr("height", 1)
+                        .append("svg:image")
+                        .attr("xlink:href", d.data)
+                        .attr("width", 200)
+                        //.attr("height", 200)
+                        .attr("x", 0)
+                        .attr("y", -50);
+                    return "url(#" + d.data + ")";
+                }
+                return d3.color("steelblue");
+            })
             .call(drag(simulation));
 
         
@@ -122,7 +120,13 @@ function Graph(){
                 .attr("cx", d => d.x)
                 .attr("cy", d => d.y)
                 .append("svg:title")
-                .text(d => d.data);
+                .text(d => {
+                    if (d.group === 2){
+                        return d.data;
+                    }
+                    return d.title;
+                });
+                
         });
 
         return svg.node()
