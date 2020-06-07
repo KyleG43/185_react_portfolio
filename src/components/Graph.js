@@ -7,6 +7,7 @@ var d3 = require('d3');
 //get a list nodes for the graph from the database
 var nodes = [];
 var links = [];
+var pushedNodes = [];
 if (!firebase.apps.length) {
     firebase.initializeApp(config);
 }
@@ -16,18 +17,20 @@ firebase.database().ref('movies').child('GraphViz').on('value', snapshot => {
         const movie = state[key];
         const movieObject = {data: movie.Poster, radius: 100, group: 1};
         nodes.push(movieObject);
+        pushedNodes.push(movie.Title);
         const actors = movie.Actors.split(', ');
         for (var i=0; i<actors.length; i++){
             const actorObject = {data: actors[i], radius: 50, group: 2};
-            if (!nodes.includes(actors[i])){
+            var found = false;
+            if (!pushedNodes.includes(actors[i])){
                 nodes.push(actorObject);
+                pushedNodes.push(actors[i]);
             }
             //add link between movie and actor
-            links.push({source: nodes.indexOf(actorObject), target: nodes.indexOf(movieObject)});
+            links.push({source: pushedNodes.indexOf(actors[i]), target: pushedNodes.indexOf(movie.Title)});
         }
     }
 })
-
 
 function Graph(){
     function drag(simulation) {
@@ -73,16 +76,29 @@ function Graph(){
             .join("line")
             .attr("stroke-width", 1);
 
-        const color = (node) => {
-            if (node.group == 1)
-                return d3.color("blue");
-            return d3.color("pink");
-        }
-
         const simulation = d3.forceSimulation(obj_nodes)
             .force("link", d3.forceLink().links(links).id(d => { return d.index; }).distance(200))
             .force("charge", d3.forceManyBody())
             .force("center", d3.forceCenter(width / 2, height / 2));
+
+        var defs = svg.append('svg:defs');
+
+
+        const color = (node) => {
+            if (node.group == 1){
+                defs.append("svg:pattern")
+                    .attr("id", "poster")
+                    .attr("width", 1)
+                    .attr("height", 1)
+                    .attr("patternUnits", "userSpaceOnUse")
+                    .append("svg:image")
+                    .attr("xlink:href", node.data)
+                    .attr("x", 0)
+                    .attr("y", 0);
+                return "url(#poster)";
+            }
+            return d3.color("steelblue");
+        }
 
         const node = svg.append("g")
             .attr("stroke", "#fff")
@@ -104,7 +120,9 @@ function Graph(){
 
             node
                 .attr("cx", d => d.x)
-                .attr("cy", d => d.y);
+                .attr("cy", d => d.y)
+                .append("svg:title")
+                .text(d => d.data);
         });
 
         return svg.node()
