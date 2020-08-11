@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
-import Late from '../images/late.jpg';
-import Surfing from '../images/surfing.jfif';
-import Italy from '../images/italy.jfif';
-import UCSB from '../images/ucsb.jpg';
-import Football from '../images/49ers.jfif';
-import Tahoe from '../images/tahoe.jfif';
-import Tomorrowland from '../images/tomorrowland.jpg';
+import Grad0 from '../images/grad0.JPG';
+import Grad1 from '../images/grad1.JPG';
+import Grad2 from '../images/grad2.JPG';
+import Grad3 from '../images/grad3.JPG';
 
 export class Images extends Component {
   render() {
     return (
       <div className="pictures">
-        <img src={Late}/>
-        <img src={Surfing}/>
-        <img src={Italy}/>
-        <img src={UCSB}/>
-        <img src={Football}/>
-        <img src={Tahoe}/>
-        <img src={Tomorrowland}/>
+        <img src={Grad0}/>
+        <img src={Grad1}/>
+        <img src={Grad2}/>
+        <img src={Grad3}/>
       </div>
     );
   }
