@@ -22,13 +22,8 @@ export class App extends Component {
     const tabs = [
       {id: 1, title: 'Home'},
       {id: 2, title: 'Images'},
-      {id: 3, title: 'Videos'},
-      {id: 4, title: 'Movies'},
-      {id: 5, title: 'Graph'},
-      {id: 6, title: 'Add Movie'},
-      {id: 7, title: 'Create List'},
-      {id: 8, title: 'Projects'},
-      {id: 9, title: 'Guest Book'}
+      {id: 3, title: 'Projects'},
+      {id: 4, title: 'Guest Book'}
     ]
     return (
       <div className="body">
