@@ -1,30 +1,29 @@
 {
   "files": {
-    "main.css": "/185_react_portfolio/static/css/main.0ced3b02.chunk.css",
-    "main.js": "/185_react_portfolio/static/js/main.c66bd014.chunk.js",
-    "main.js.map": "/185_react_portfolio/static/js/main.c66bd014.chunk.js.map",
+    "main.css": "/185_react_portfolio/static/css/main.a918a289.chunk.css",
+    "main.js": "/185_react_portfolio/static/js/main.370a76b9.chunk.js",
+    "main.js.map": "/185_react_portfolio/static/js/main.370a76b9.chunk.js.map",
     "runtime-main.js": "/185_react_portfolio/static/js/runtime-main.6ea0ff42.js",
     "runtime-main.js.map": "/185_react_portfolio/static/js/runtime-main.6ea0ff42.js.map",
-    "static/js/2.bdd09dfa.chunk.js": "/185_react_portfolio/static/js/2.bdd09dfa.chunk.js",
-    "static/js/2.bdd09dfa.chunk.js.map": "/185_react_portfolio/static/js/2.bdd09dfa.chunk.js.map",
+    "static/js/2.5c8cd887.chunk.js": "/185_react_portfolio/static/js/2.5c8cd887.chunk.js",
+    "static/js/2.5c8cd887.chunk.js.map": "/185_react_portfolio/static/js/2.5c8cd887.chunk.js.map",
     "index.html": "/185_react_portfolio/index.html",
-    "precache-manifest.e3a5eec5e01487d7e315b26c6ba5261b.js": "/185_react_portfolio/precache-manifest.e3a5eec5e01487d7e315b26c6ba5261b.js",
+    "precache-manifest.15f0c3a3f938f1186054a82e12525afe.js": "/185_react_portfolio/precache-manifest.15f0c3a3f938f1186054a82e12525afe.js",
     "service-worker.js": "/185_react_portfolio/service-worker.js",
-    "static/css/main.0ced3b02.chunk.css.map": "/185_react_portfolio/static/css/main.0ced3b02.chunk.css.map",
-    "static/js/2.bdd09dfa.chunk.js.LICENSE.txt": "/185_react_portfolio/static/js/2.bdd09dfa.chunk.js.LICENSE.txt",
-    "static/media/49ers.jfif": "/185_react_portfolio/static/media/49ers.12c56569.jfif",
-    "static/media/italy.jfif": "/185_react_portfolio/static/media/italy.c054da1b.jfif",
-    "static/media/late.jpg": "/185_react_portfolio/static/media/late.b334e771.jpg",
-    "static/media/sacramento.jpg": "/185_react_portfolio/static/media/sacramento.8be0be66.jpg",
-    "static/media/surfing.jfif": "/185_react_portfolio/static/media/surfing.62d8f504.jfif",
-    "static/media/tahoe.jfif": "/185_react_portfolio/static/media/tahoe.b94db0e6.jfif",
-    "static/media/tomorrowland.jpg": "/185_react_portfolio/static/media/tomorrowland.c52b5bd2.jpg",
-    "static/media/ucsb.jpg": "/185_react_portfolio/static/media/ucsb.a760cdf0.jpg"
+    "static/css/main.a918a289.chunk.css.map": "/185_react_portfolio/static/css/main.a918a289.chunk.css.map",
+    "static/js/2.5c8cd887.chunk.js.LICENSE.txt": "/185_react_portfolio/static/js/2.5c8cd887.chunk.js.LICENSE.txt",
+    "static/media/grad0.JPG": "/185_react_portfolio/static/media/grad0.bb58d8af.JPG",
+    "static/media/grad1.JPG": "/185_react_portfolio/static/media/grad1.80d11312.JPG",
+    "static/media/grad2.JPG": "/185_react_portfolio/static/media/grad2.3a74aa98.JPG",
+    "static/media/grad3.JPG": "/185_react_portfolio/static/media/grad3.df86f3b2.JPG",
+    "static/media/plane.ico": "/185_react_portfolio/static/media/plane.0327e954.ico",
+    "static/media/profile.JPG": "/185_react_portfolio/static/media/profile.f068221b.JPG",
+    "static/media/spartify_logo.png": "/185_react_portfolio/static/media/spartify_logo.c33c819f.png"
   },
   "entrypoints": [
     "static/js/runtime-main.6ea0ff42.js",
-    "static/js/2.bdd09dfa.chunk.js",
-    "static/css/main.0ced3b02.chunk.css",
-    "static/js/main.c66bd014.chunk.js"
+    "static/js/2.5c8cd887.chunk.js",
+    "static/css/main.a918a289.chunk.css",
+    "static/js/main.370a76b9.chunk.js"
   ]
 }
