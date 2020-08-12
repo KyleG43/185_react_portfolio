@@ -9,10 +9,13 @@ export class Home extends Component {
         <div className="bio">
           <h5>About Me</h5>
           <p>
-            My name is Kyle Giannini. I am a senior at UCSB studying computer
-            science. After I graduate, I plan on working in the tech industry.
-            In my spare time, I enjoy surfing, playing piano and guitar, and
-            hanging out with my friends and my girlfriend.
+            My name is Kyle Giannini. I recently graduated from UC Santa Barbara with a B.S.
+            degree in Computer Science. I am currently looking for a full-time Software Engineer
+            position. In my spare time, I enjoy surfing, playing piano and guitar, hiking, watching sports, 
+            playing video games, going out with my friends, and spending time with my girlfriend. I have a few
+            projects that I've been working on recently, you can see them on the projects page of
+            this website. Also, if you like my portfolio and want to get in touch, you can leave me
+            a message on the Guest Book page. Thank you for taking the time to check out my portfolio!
           </p>
           <div className="home">
             <a href="https://1drv.ms/b/s!ArJIC4tehjeo8EtUsZz9PPvEXppM" target="_blank">Resume</a>
