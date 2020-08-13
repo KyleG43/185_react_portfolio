@@ -25,7 +25,7 @@ export class Projects extends Component {
           <img src={Spring}/>
           <p>
             <a href="https://ucsb-cs56-where-is-every1.herokuapp.com/" target="_blank">Where Is Every1</a>:
-            A Spring app my friends and I made to see when UCSB classrooms are empty so we could use the space to study.
+            A Spring Boot app my friends and I made to see when UCSB classrooms are empty so we could use the space to study.
           </p>
         </div>
       </div>
